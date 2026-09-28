@@ -1,1 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -------------------------------------------------------------------------- */
+/* 1. DESIGN TOKENS (Variáveis de Tema Centralizadas)                         */
+/* -------------------------------------------------------------------------- */
+@layer base {
+  :root {
+    /* Cores de Destaque */
+    --color-green-neon: 0 255 136;
+    --color-amber-neon: 255 184 0;
+
+    /* Cores do Card Escuro (Valores RGB para flexibilidade de opacidade) */
+    --card-bg-start: #1d223f;
+    --card-bg-end: #171a33;
+    --card-border: #2d345b;
+  }
+
+  /* Reset Base de Qualidade Profissional */
+  * {
+    border-color: var(--card-border);
+  }
+
+  body {
+    background-color: #131629;
+    color: #f3f4f6;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11"; /* Tipografia legível */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* 2. COMPONENTES CUSTOMIZADOS (@layer components)                            */
+/* Integração perfeita com classes do Tailwind e performance acelerada via GPU  */
+/* -------------------------------------------------------------------------- */
+@layer components {
+  /* Glow Verde Avançado com Efeitos de Profundidade */
+  .glow-green {
+    filter: drop-shadow(0px 4px 12px rgba(var(--color-green-neon), 0.4));
+    will-change: filter;
+    transition: filter 0.3s ease-in-out;
+  }
+
+  .glow-green-lg {
+    filter: drop-shadow(0px 0px 20px rgba(var(--color-green-neon), 0.6));
+    will-change: filter;
+    transition: filter 0.3s ease-in-out;
+  }
+
+  /* Glow Âmbar Avançado */
+  .glow-amber {
+    filter: drop-shadow(0px 4px 12px rgba(var(--color-amber-neon), 0.4));
+    will-change: filter;
+    transition: filter 0.3s ease-in-out;
+  }
+
+  .glow-amber-lg {
+    filter: drop-shadow(0px 0px 20px rgba(var(--color-amber-neon), 0.6));
+    will-change: filter;
+    transition: filter 0.3s ease-in-out;
+  }
+
+  /* Card Dark Moderno (Com suporte a interação hover e borda sutil) */
+  .card-dark {
+    background: linear-gradient(135deg, var(--card-bg-start) 0%, var(--card-bg-end) 100%);
+    border: 1px solid var(--card-border);
+    border-radius: 1rem; /* 16px */
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Variante interativa do Card (Hover suave) */
+  .card-dark-hover {
+    @apply card-dark hover:-translate-y-1 hover:border-[#00ff88]/40 hover:shadow-[0_12px_40px_-10px_rgba(0,255,136,0.15)];
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* 3. UTILITÁRIOS E ACESSIBILIDADE                                            */
+/* -------------------------------------------------------------------------- */
+@layer utilities {
+  /* Respeita usuários que desativaram animações no sistema */
+  @media (prefers-reduced-motion: reduce) {
+    .glow-green,
+    .glow-amber,
+    .card-dark,
+    .card-dark-hover {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+}
 
